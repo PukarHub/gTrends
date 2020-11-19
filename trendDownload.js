@@ -1,27 +1,29 @@
 const googleTrends = require("google-trends-api");
 
-function getInterestOn(keyword) {
+
+
+function getInterestOverTimeFor(keyword) {
   googleTrends
     .interestOverTime({ keyword: "software engineering" })
     .then(function (results) {
       var resultsJSON = JSON.parse(results);
 
       var data = resultsJSON["default"];
-      var timelineData = data["timelineData"]; 
+      var timelineData = data["timelineData"];
 
       timelineData.forEach(function (timestamp) {
         console.log(
-          `On  ${timestamp["formattedTime"]}, the interest value was at ${timestamp.value}`
+          `On ${timestamp["formattedTime"]}, the interest value was at ${timestamp.value}`
         );
       });
     })
     .catch(function (err) {
-      console.error("error", err);
+      console.error("Oh no there was an error", err);
     });
 }
 
 
-function getDailyTrendsOn(day) {
+function getDailyTrendsForDay(day) {
   googleTrends
     .dailyTrends({
       trendDate: day,
@@ -29,11 +31,12 @@ function getDailyTrendsOn(day) {
     })
     .then(function (results) {
       var resultsJSON = JSON.parse(results);
+
       var data = resultsJSON["default"];
-      var dayData = data["trendingSearchesDacd gys"][0];
+      var dayData = data["trendingSearchesDays"][0];
       var searches = dayData["trendingSearches"];
 
-      console.log(`On ${day}\n`);
+      console.log(`On  ${day}\n`);
       searches.forEach(function (search) {
         console.log(
           `The search term ${search["title"]["query"]} has ${search["formattedTraffic"]} traffic`
@@ -45,5 +48,5 @@ function getDailyTrendsOn(day) {
     });
 }
 
-getInterestOn("software engineer");
-getDailyTrendsOn(new Date('2020-11-15'));
+getInterestOverTimeFor("software engineer");
+getDailyTrendsForDay(new Date('2020-11-15'));
