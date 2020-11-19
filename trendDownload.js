@@ -11,12 +11,12 @@ function getInterestOn(keyword) {
 
       timelineData.forEach(function (timestamp) {
         console.log(
-          `On the date ${timestamp["formattedTime"]}, the interest value was at ${timestamp.value}`
+          `On  ${timestamp["formattedTime"]}, the interest value was at ${timestamp.value}`
         );
       });
     })
     .catch(function (err) {
-      console.error("Oh no there was an error", err);
+      console.error("error", err);
     });
 }
 
@@ -33,7 +33,7 @@ function getDailyTrendsOn(day) {
       var dayData = data["trendingSearchesDacd gys"][0];
       var searches = dayData["trendingSearches"];
 
-      console.log(`On the date of ${day}\n`);
+      console.log(`On ${day}\n`);
       searches.forEach(function (search) {
         console.log(
           `The search term ${search["title"]["query"]} has ${search["formattedTraffic"]} traffic`
@@ -41,7 +41,7 @@ function getDailyTrendsOn(day) {
       });
     })
     .catch(function (err) {
-      console.error("Oh no an error!", err);
+      console.error("error!", err);
     });
 }
 
