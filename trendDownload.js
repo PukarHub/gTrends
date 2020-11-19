@@ -2,7 +2,7 @@ const googleTrends = require("google-trends-api");
 
 function getInterestOn(keyword) {
   googleTrends
-    .interestOverTime({ keyword: "Women's march" })
+    .interestOverTime({ keyword: "software engineering" })
     .then(function (results) {
       var resultsJSON = JSON.parse(results);
 
